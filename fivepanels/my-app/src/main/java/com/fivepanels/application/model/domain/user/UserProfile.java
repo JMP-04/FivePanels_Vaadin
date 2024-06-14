@@ -4,7 +4,7 @@ import com.fivepanels.application.model.domain.user.misc.Hashtag;
 import com.fivepanels.application.model.domain.user.misc.Language;
 import com.fivepanels.application.model.domain.user.misc.MedicalTitle;
 import com.fivepanels.application.model.foundation.assertion.Assertion;
-import com.fivepanels.application.model.domain.user.misc.Experience;
+
 import java.io.File;
 import java.util.*;
 
@@ -38,7 +38,7 @@ public class UserProfile {
         setFirstName(firstName);
         setLastName(lastName);
         setProfilePicture(profilePicture);
-        setMedicalTitle(medicalTitles);
+        setMedicalTitles(medicalTitles);
         setExperiences(experiences);
         setCity(city);
         setLanguages(languages);
@@ -88,14 +88,14 @@ public class UserProfile {
         this.profilePicture = profilePicture;
     }
 
-    public List<MedicalTitle> getMedicalTitle() {
+    public List<MedicalTitle> getMedicalTitles() {
         return medicalTitles;
     }
 
-    public void setMedicalTitle(List<MedicalTitle> medicalTitle) {
-        Assertion.isNotNull(medicalTitle, "medicalTitle");
-        Assertion.isNotEmpty(medicalTitle, "medicalTitle");
-        this.medicalTitles = medicalTitle;
+    public void setMedicalTitles(List<MedicalTitle> medicalTitles) {
+        Assertion.isNotNull(medicalTitles, "medicalTitles");
+        Assertion.isNotEmpty(medicalTitles, "medicalTitles");
+        this.medicalTitles = medicalTitles;
     }
 
     public List<Hashtag> getExperiences() {
@@ -105,7 +105,6 @@ public class UserProfile {
     public void setExperiences(List<Hashtag> experiences) {
         Assertion.isNotNull(experiences, "experiences");
         Assertion.isNotEmpty(experiences, "experiences");
-        Experience.isValidMedicalExperience(experiences.toString());
         this.experiences = experiences;
     }
 

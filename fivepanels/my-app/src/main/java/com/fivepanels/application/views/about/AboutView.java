@@ -1,16 +1,15 @@
 package com.fivepanels.application.views.about;
 
 import com.fivepanels.application.views.MainLayout;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.LumoUtility.FontSize;
 import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
-@PageTitle("About | FivePanels")
-@Route(value = "about", layout = MainLayout.class)
+@PageTitle("About")
+@Route(value = "about/about", layout = MainLayout.class)
 public class AboutView extends VerticalLayout {
 
     public AboutView() {
@@ -20,11 +19,43 @@ public class AboutView extends VerticalLayout {
         img.setWidth("300px");
         add(img);
 
-        H2 header = new H2("This is FivePanels, a software created for doctors to help each other around the world.");
+        H1 header = new H1("This is FivePanels, a software created for doctors to help each other around the world.");
         header.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
         add(header);
-        add(new Paragraph("Made by JMP-04 and markoteric."));
-        add(new Paragraph("This software is free, open source and available on GitHub. Enjoy your stay! ☕"));
+
+        // Create Anchor for GitHub profile
+        Anchor githubLink1 = new Anchor("https://github.com/JMP-04", "JMP-04");
+        githubLink1.setTarget("_blank");
+
+        Anchor githubLink2 = new Anchor("https://github.com/markoteric", "markoteric");
+        githubLink2.setTarget("_blank");
+
+        Span text1 = new Span("Made by ");
+        text1.addClassName(FontSize.LARGE);
+
+        Span text2 = new Span(" and ");
+        text2.addClassName(FontSize.LARGE);
+
+        Span text3 = new Span(".");
+        text3.addClassName(FontSize.LARGE);
+
+        Paragraph madeBy = new Paragraph(text1, githubLink1, text2, githubLink2, text3);
+        madeBy.addClassName(FontSize.LARGE);
+        add(madeBy);
+
+        // Create Anchor for GitHub repository link
+        Anchor githubRepoLink = new Anchor("https://github.com/JMP-04/FivePanels_Vaadin", "GitHub");
+        githubRepoLink.setTarget("_blank");
+
+        Span text4 = new Span("This software is free, open source and available on ");
+        text4.addClassName(FontSize.LARGE);
+
+        Span text5 = new Span(". Enjoy your stay! ☕");
+        text5.addClassName(FontSize.LARGE);
+
+        Paragraph softwareInfo = new Paragraph(text4, githubRepoLink, text5);
+        softwareInfo.addClassName(FontSize.LARGE);
+        add(softwareInfo);
 
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);

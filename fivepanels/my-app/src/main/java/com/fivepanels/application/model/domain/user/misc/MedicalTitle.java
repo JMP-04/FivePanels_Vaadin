@@ -13,63 +13,47 @@ import java.util.Set;
 
 public class MedicalTitle {
     private String medicalTitle;
-    private static Set<String> validTitles;
+    private static Set<String> validTitles = loadValidMedicalTitles();
 
     public MedicalTitle() {
-
-        this.validTitles = loadValidMedicalTitles();
     }
 
     public MedicalTitle(String medicalTitle) {
-
-        this();
         setMedicalTitle(medicalTitle);
     }
 
     public String getMedicalTitle() {
-
         return medicalTitle;
     }
 
-    public Set<String> loadValidMedicalTitles() {
-
-        Set<String> validTitles = new HashSet<>();
-        try (InputStream is = getClass().getResourceAsStream("/medicaltitles.txt")) {
-
-            Assertion.isNotNull(is, "is");
-
+    private static Set<String> loadValidMedicalTitles() {
+        Set<String> titles = new HashSet<>();
+        try (InputStream is = MedicalTitle.class.getResourceAsStream("/medicaltitles.txt")) {
+            Assertion.isNotNull(is, "InputStream");
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-
                 String title;
                 while ((title = reader.readLine()) != null) {
-                    validTitles.add(title.trim());
+                    titles.add(title.trim().toUpperCase());
                 }
-
-                System.out.println("Loaded " + validTitles.size() + " medical titles.");
+                System.out.println("Loaded " + titles.size() + " medical titles.");
             }
         } catch (IOException e) {
-
             throw new AssertionException("Failed to load medical titles from file: " + e.getMessage());
         }
-
-        return validTitles;
+        return titles;
     }
 
     public static boolean isValidMedicalTitle(String title) {
-
-        return validTitles.contains(title.trim());
+        return validTitles.contains(title.trim().toUpperCase());
     }
 
     public void setMedicalTitle(String medicalTitle) {
-
         Assertion.isNotNull(medicalTitle, "medicalTitle");
         Assertion.isNotBlank(medicalTitle, "medicalTitle");
         Assertion.hasMinLength(medicalTitle, 2, "medicalTitle");
         if (!isValidMedicalTitle(medicalTitle)) {
-
             throw new UserException("Invalid medical title: " + medicalTitle);
         }
-
         this.medicalTitle = medicalTitle;
     }
 }

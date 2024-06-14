@@ -5,8 +5,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Messenger | FivePanels")
-@Route(value = "messenger", layout = MainLayout.class)
+@PageTitle("Messenger")
+@Route(value = "messenger/chats", layout = MainLayout.class)
 public class MessengerView extends VerticalLayout {
 
 

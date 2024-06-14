@@ -21,10 +21,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@PageTitle("Create Medical Case | FivePanels")
-@Route(value = "medical-cases/create", layout = MainLayout.class)
+@PageTitle("Create New Case")
+@Route(value = "medical-cases/create-new-case", layout = MainLayout.class)
 public class CreateNewMedicalCaseView extends VerticalLayout {
 
+    private TextArea medicalCaseName;
+
+    private TextArea title;
     private TextArea content;
     private Button createButton;
     private Upload upload;
@@ -40,8 +43,11 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
 
     private void initComponents() {
 
+        medicalCaseName = new TextArea();
+        title = new TextArea();
+
         content = new TextArea();
-        createButton = new Button("Create");
+        createButton = new Button("Publish");
 
         MultiFileBuffer buffer = new MultiFileBuffer();
         upload = new Upload(buffer);
@@ -63,23 +69,34 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
 
     private void addComponents() {
 
+        medicalCaseName.setMinLength(4);
+        medicalCaseName.setMaxLength(64);
+        medicalCaseName.setWidth("25%");
+        medicalCaseName.setLabel("Name of your medical case.");
+        medicalCaseName.setPlaceholder("Enter your medical case name here.");
+
+        title.setMinLength(4);
+        title.setMaxLength(64);
+        title.setWidth("25%");
+        title.setLabel("Title of your medical case.");
+        title.setPlaceholder("Enter your medical case title here.");
+
         content.setMinLength(128);
         content.setMaxLength(2048);
         content.setWidth("80%");
         content.setLabel("Please enter the content of the new medical case. The medical case will be created with the content you entered and the files you uploaded.");
-        content.setValue("Enter your content here.");
+        content.setPlaceholder("Enter your content here.");
 
-        add(content, uploadInfo, upload, createButton);
+        add(medicalCaseName, title,content, uploadInfo, upload, createButton);
     }
 
     private void addListeners() {
-        content.addValueChangeListener(e -> {
-            e.getSource().setHelperText(e.getValue().length() + "/" + content.getMaxLength());
-        });
 
         upload.addSucceededListener((ComponentEventListener<SucceededEvent>) event -> {
             MultiFileBuffer buffer = (MultiFileBuffer) upload.getReceiver();
             files.add(buffer.getFileData(event.getFileName()).getFile());
+            Notification notification = Notification.show("File uploaded successfully.");
+            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
         });
 
         upload.addFileRejectedListener(event -> {
@@ -95,17 +112,20 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
         createButton.addClickListener((ComponentEventListener<ClickEvent<Button>>) buttonOnClickEvent -> {
             try {
                 if (content.getValue() == null || content.getValue().isEmpty()) {
-                    Notification.show("Please enter a value for the content of the new medical case.");
+                    Notification notification = Notification.show("Please enter a value for the content of the new medical case.");
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return;
                 }
 
                 if (content.getValue().length() < 128) {
-                    Notification.show("The content of the new medical case is too short. Your content character-length: " + content.getValue().length() + " , required: " + content.getMinLength());
+                    Notification notification = Notification.show("The content of the new medical case is too short. Your content character-length: " + content.getValue().length() + " , required: " + content.getMinLength());
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return;
                 }
 
                 if (content.getValue().length() > 2048) {
-                    Notification.show("The content of the new medical case is too long. Your content character-length: " + content.getValue().length() + " , length cannot exceed: " + content.getMaxLength());
+                    Notification notification = Notification.show("The content of the new medical case is too long. Your content character-length: " + content.getValue().length() + " , length cannot exceed: " + content.getMaxLength());
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return;
                 }
 
@@ -113,7 +133,8 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
                 // Handle the logic for saving the medical case and the uploaded files.
                 getUI().ifPresent(ui -> ui.navigate(MedicalCaseView.class));
             } catch (Exception e) {
-                Notification.show("Error occurred, please try again later. :(");
+                Notification notification = Notification.show("Error occurred, please try again later. :(");
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
             }
         });
     }

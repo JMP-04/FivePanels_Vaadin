@@ -5,9 +5,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@PageTitle("Profile")
-@Route(value = "user/profile", layout = MainLayout.class)
-public class ProfileView extends VerticalLayout {
+@PageTitle("Messenger | FivePanels")
+@Route(value = "contacts", layout = MainLayout.class)
+public class ContactView extends VerticalLayout {
 
-
+    
 }

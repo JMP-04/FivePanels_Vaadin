@@ -1,6 +1,7 @@
 package com.fivepanels.application.views.medicalcase;
 
 import com.fivepanels.application.model.domain.medicalcase.MedicalCase;
+import com.fivepanels.application.model.repository.MedicalCaseRepository;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -20,13 +21,14 @@ import com.vaadin.flow.component.html.Div;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @PageTitle("Create New Case")
 @Route(value = "medical-cases/create-new-case", layout = MainLayout.class)
 public class CreateNewMedicalCaseView extends VerticalLayout {
 
     private TextArea medicalCaseName;
-
     private TextArea title;
     private TextArea content;
     private Button createButton;
@@ -34,6 +36,7 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
     private Div uploadInfo;
     private List<File> files;
     private MedicalCase medicalCase;
+    private static final Logger LOGGER = Logger.getLogger(CreateNewMedicalCaseView.class.getName());
 
     public CreateNewMedicalCaseView() {
         initComponents();
@@ -42,10 +45,8 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
     }
 
     private void initComponents() {
-
         medicalCaseName = new TextArea();
         title = new TextArea();
-
         content = new TextArea();
         createButton = new Button("Publish");
 
@@ -57,7 +58,7 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
         upload.setMaxFileSize(3840 * 2160);
 
         uploadInfo = new Div();
-        uploadInfo.setText("Accepted file types: .jpg, .png | Max file count: 10 |  Max resolution: 3840 x 2160");
+        uploadInfo.setText("Accepted file types: .jpg, .png | Max file count: 10 | Max resolution: 3840 x 2160");
 
         files = new ArrayList<>();
 
@@ -68,7 +69,6 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
     }
 
     private void addComponents() {
-
         medicalCaseName.setMinLength(4);
         medicalCaseName.setMaxLength(64);
         medicalCaseName.setWidth("25%");
@@ -87,11 +87,10 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
         content.setLabel("Please enter the content of the new medical case. The medical case will be created with the content you entered and the files you uploaded.");
         content.setPlaceholder("Enter your content here.");
 
-        add(medicalCaseName, title,content, uploadInfo, upload, createButton);
+        add(medicalCaseName, title, content, uploadInfo, upload, createButton);
     }
 
     private void addListeners() {
-
         upload.addSucceededListener((ComponentEventListener<SucceededEvent>) event -> {
             MultiFileBuffer buffer = (MultiFileBuffer) upload.getReceiver();
             files.add(buffer.getFileData(event.getFileName()).getFile());
@@ -111,6 +110,18 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
 
         createButton.addClickListener((ComponentEventListener<ClickEvent<Button>>) buttonOnClickEvent -> {
             try {
+                if (medicalCaseName.getValue() == null || medicalCaseName.getValue().isEmpty()) {
+                    Notification notification = Notification.show("Please enter a value for the name of the new medical case.");
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    return;
+                }
+
+                if (title.getValue() == null || title.getValue().isEmpty()) {
+                    Notification notification = Notification.show("Please enter a value for the title of the new medical case.");
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    return;
+                }
+
                 if (content.getValue() == null || content.getValue().isEmpty()) {
                     Notification notification = Notification.show("Please enter a value for the content of the new medical case.");
                     notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
@@ -130,9 +141,15 @@ public class CreateNewMedicalCaseView extends VerticalLayout {
                 }
 
                 medicalCase = new MedicalCase();
-                // Handle the logic for saving the medical case and the uploaded files.
-                getUI().ifPresent(ui -> ui.navigate(MedicalCaseView.class));
+                medicalCase.setMedicalCaseName(medicalCaseName.getValue());
+                medicalCase.setTitle(title.getValue());
+                medicalCase.setTextContent(content.getValue());
+                medicalCase.setFileContent(files);
+
+                MedicalCaseRepository.save(medicalCase);
+                getUI().ifPresent(ui -> ui.navigate(MyMedicalCaseView.class));
             } catch (Exception e) {
+                LOGGER.log(Level.SEVERE, "Error saving medical case", e);
                 Notification notification = Notification.show("Error occurred, please try again later. :(");
                 notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
             }

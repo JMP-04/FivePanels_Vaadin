@@ -7,19 +7,15 @@ import com.fivepanels.application.model.foundation.assertion.Assertion;
 import com.fivepanels.application.model.foundation.exception.UserException;
 
 import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import java.util.*;
 
 public class MedicalCase extends BaseEntity {
 
     private String medicalCaseName;
     private User owner;
+    private String title;
     private String description;
-    private List<String> textContent;
+    private String textContent;
     private List<File> fileContent;
     private Set<User> medicalCaseMembers;
     private Integer viewCount;
@@ -28,11 +24,20 @@ public class MedicalCase extends BaseEntity {
     private Set<Answer> answers;
     private Map<UUID, Map<User, Integer>> votes;
 
+    // Constructors
     public MedicalCase() {
         super();
+        this.fileContent = new ArrayList<>();
+        this.medicalCaseMembers = new HashSet<>();
+        this.viewCount = 0;
+        this.likeCount = 0;
+        this.medicalCaseHashtags = new HashSet<>();
+        this.answers = new HashSet<>();
+        this.votes = new HashMap<>();
     }
 
     public MedicalCase(String medicalCaseName, User owner, List<String> textContent, List<File> fileContent, Set<User> medicalCaseMembers, Set<Hashtag> medicalCaseHashtags) {
+        this();
         Assertion.isNotNull(medicalCaseName, "medicalCaseName");
         Assertion.isNotBlank(medicalCaseName, "medicalCaseName");
         Assertion.hasMinLength(medicalCaseName, 8, "medicalCaseName");
@@ -40,16 +45,13 @@ public class MedicalCase extends BaseEntity {
 
         this.medicalCaseName = medicalCaseName;
         this.owner = owner;
-        this.textContent = textContent != null ? textContent : new ArrayList<>();
+        this.textContent = String.valueOf(textContent);
         this.fileContent = fileContent != null ? fileContent : new ArrayList<>();
         this.medicalCaseMembers = medicalCaseMembers != null ? medicalCaseMembers : new HashSet<>();
-        this.viewCount = 0;
-        this.likeCount = 0;
         this.medicalCaseHashtags = medicalCaseHashtags != null ? medicalCaseHashtags : new HashSet<>();
-        this.answers = new HashSet<>();
-        this.votes = new HashMap<>();
     }
 
+    // Getters
     public String getMedicalCaseName() {
         return medicalCaseName;
     }
@@ -58,12 +60,16 @@ public class MedicalCase extends BaseEntity {
         return owner;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public List<String> getTextContent() {
-        return textContent;
+        return Collections.singletonList(textContent);
     }
 
     public List<File> getFileContent() {
@@ -94,6 +100,63 @@ public class MedicalCase extends BaseEntity {
         return votes;
     }
 
+    // Setters
+    public void setMedicalCaseName(String medicalCaseName) {
+        Assertion.isNotNull(medicalCaseName, "medicalCaseName");
+        Assertion.isNotBlank(medicalCaseName, "medicalCaseName");
+        this.medicalCaseName = medicalCaseName;
+    }
+
+    public void setOwner(User owner) {
+        Assertion.isNotNull(owner, "owner");
+        this.owner = owner;
+    }
+
+    public void setTitle(String title) {
+        Assertion.isNotNull(title, "title");
+        Assertion.isNotBlank(title, "title");
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTextContent(String textContent) {
+        Assertion.isNotNull(textContent, "textContent");
+        Assertion.isNotBlank(textContent, "textContent");
+        this.textContent = textContent;
+    }
+
+    public void setFileContent(List<File> fileContent) {
+        this.fileContent = fileContent;
+    }
+
+    public void setMedicalCaseMembers(Set<User> medicalCaseMembers) {
+        this.medicalCaseMembers = medicalCaseMembers;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public void setMedicalCaseHashtags(Set<Hashtag> medicalCaseHashtags) {
+        this.medicalCaseHashtags = medicalCaseHashtags;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public void setVotes(Map<UUID, Map<User, Integer>> votes) {
+        this.votes = votes;
+    }
+
+    // Business Logic Methods
     public void addAnswer(String answerText, boolean isCorrect) {
         Assertion.isNotNull(answerText, "answerText");
         Assertion.isNotBlank(answerText, "answerText");

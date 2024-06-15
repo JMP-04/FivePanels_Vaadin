@@ -223,7 +223,7 @@ public class User extends BaseEntity {
     public void createGroupChatWith(User... friends) {
         Assertion.isNotNull(friends, "friends");
         Assertion.isNotEmpty(friends, "friends");
-        if (Arrays.stream(friends).count() < 3 && Arrays.stream(friends).count() > 20) {
+        if (Arrays.stream(friends).count() < 3 || Arrays.stream(friends).count() > 20) {
             throw new UserException("Group chat must have between 3 and 20 members");
         }
         Set<User> members = new HashSet<>();

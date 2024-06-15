@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b52be292-f434-40a6-8c11-3625499432c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/messenger/MessengerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/messenger/MessengerView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +26,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "Spring Boot.Application.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
@@ -71,6 +76,8 @@
       <workItem from="1718454712605" duration="150000" />
       <workItem from="1718454865943" duration="36000" />
       <workItem from="1718456254723" duration="353000" />
+      <workItem from="1718456631954" duration="45000" />
+      <workItem from="1718456681339" duration="7133000" />
     </task>
     <servers />
   </component>

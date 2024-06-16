@@ -1,7 +1,6 @@
 package com.fivepanels.application.model.repository;
 
 import com.fivepanels.application.model.domain.user.User;
-import com.fivepanels.application.model.domain.user.misc.Password;
 
 import java.time.Instant;
 import java.util.*;
@@ -44,7 +43,7 @@ public class UserRepository {
 
     public static Optional<User> findByEmailAndPassword(String email, String password) {
         return findAll().stream()
-                .filter(user -> user.getEmail().getEmail().equals(email) && user.getPassword().equals(new Password(password.toCharArray())))
+                .filter(user -> user.getEmail().getEmail().equals(email) && user.getPassword().matches(password.toCharArray()))
                 .findFirst();
     }
 }

@@ -1,5 +1,9 @@
 package com.fivepanels.application;
 
+import com.fivepanels.application.model.domain.user.User;
+import com.fivepanels.application.model.domain.user.misc.Email;
+import com.fivepanels.application.model.domain.user.misc.Password;
+import com.fivepanels.application.model.repository.UserRepository;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;

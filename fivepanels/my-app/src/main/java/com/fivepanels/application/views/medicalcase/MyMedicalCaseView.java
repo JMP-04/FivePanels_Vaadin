@@ -4,21 +4,21 @@ import com.fivepanels.application.model.domain.medicalcase.MedicalCase;
 import com.fivepanels.application.model.repository.MedicalCaseRepository;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @PageTitle("My Cases")
 @Route(value = "medical-cases/my-cases", layout = MainLayout.class)
 public class MyMedicalCaseView extends VerticalLayout {
 
     private Grid<MedicalCase> grid;
-    private static final Logger LOGGER = Logger.getLogger(MyMedicalCaseView.class.getName());
 
     public MyMedicalCaseView() {
         initComponents();
@@ -29,14 +29,24 @@ public class MyMedicalCaseView extends VerticalLayout {
 
     private void initComponents() {
         grid = new Grid<>();
-        grid.addColumn(MedicalCase::getId).setHeader("ID");
-        grid.addColumn(MedicalCase::getMedicalCaseName).setHeader("Name");
-        grid.addColumn(MedicalCase::getTitle).setHeader("Title");
-        grid.addColumn(MedicalCase::getDescription).setHeader("Description");
-        grid.addColumn(MedicalCase::getViewCount).setHeader("View Count");
-        grid.addColumn(MedicalCase::getLikeCount).setHeader("Like Count");
-        grid.addColumn(MedicalCase::getCreatedAt).setHeader("Created At");
-        grid.addColumn(MedicalCase::getMedicalCaseHashtags).setHeader("Hashtags");
+
+        grid.addColumn(new ComponentRenderer<>(medicalCase -> {
+            VerticalLayout layout = new VerticalLayout();
+
+            H1 id = new H1(medicalCase.getId().toString());
+            id.getStyle().set("font-weight", "bold");
+            layout.add(id);
+            layout.add(new Span("Name: " + medicalCase.getMedicalCaseName()));
+            layout.add(new Span("Title: " + medicalCase.getTitle()));
+            layout.add(new Span("Description: " + medicalCase.getDescription()));
+            layout.add(new Span("Content: " + medicalCase.getTextContent()));
+            layout.add(new Span("View Count: " + medicalCase.getViewCount()));
+            layout.add(new Span("Like Count: " + medicalCase.getLikeCount()));
+            layout.add(new Span("Created At: " + medicalCase.getCreatedAt()));
+            layout.add(new Span("Hashtags: " + medicalCase.getMedicalCaseHashtags().toString()));
+
+            return layout;
+        })).setHeader("My Medical Cases");
     }
 
     private void addComponents() {
@@ -50,7 +60,6 @@ public class MyMedicalCaseView extends VerticalLayout {
         try {
             grid.setItems(MedicalCaseRepository.findAll());
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error loading medical cases", e);
             Notification.show("Error loading medical cases.", 3000, Notification.Position.MIDDLE).addThemeVariants(NotificationVariant.LUMO_ERROR);
         }
     }

@@ -31,7 +31,7 @@ public class FriendRequestView extends VerticalLayout {
     }
 
     private void initComponents() {
-        // Create grids for incoming and outgoing requests
+
         incomingRequestsGrid = new Grid<>();
         outgoingRequestsGrid = new Grid<>();
 
@@ -39,18 +39,15 @@ public class FriendRequestView extends VerticalLayout {
         incomingRequestsGrid.setItems("Alice", "Bob", "Charlie");
         outgoingRequestsGrid.setItems("David", "Eve", "Frank");
 
-        // Create custom headers
         incomingHeader = new H2("Incoming Requests");
         incomingHeader.getStyle().set("color", "green");
 
         outgoingHeader = new H2("Outgoing Requests");
         outgoingHeader.getStyle().set("color", "red");
 
-        // Add headers to the grids
         incomingRequestsGrid.addColumn(name -> name).setHeader(incomingHeader);
         outgoingRequestsGrid.addColumn(name -> name).setHeader(outgoingHeader);
 
-        // Add buttons to each row in the incoming requests grid
         incomingRequestsGrid.addColumn(new ComponentRenderer<>(item -> {
             HorizontalLayout buttonsLayout = new HorizontalLayout();
             Button acceptButton = new Button("Accept", event -> acceptRequest(item));
@@ -63,7 +60,6 @@ public class FriendRequestView extends VerticalLayout {
             return buttonsLayout;
         })).setHeader(createStyledHeader("Actions"));
 
-        // Add buttons to each row in the outgoing requests grid
         outgoingRequestsGrid.addColumn(new ComponentRenderer<>(item -> {
             HorizontalLayout buttonsLayout = new HorizontalLayout();
             Button cancelButton = new Button("Cancel friend request", event -> cancelOutgoingRequest(item));
@@ -79,7 +75,6 @@ public class FriendRequestView extends VerticalLayout {
         outgoingRequestsLayout = new VerticalLayout(outgoingRequestsGrid);
         outgoingRequestsLayout.setSizeFull();
 
-        // Create a horizontal layout to hold the two vertical layouts
         splitLayout = new HorizontalLayout(incomingRequestsLayout, outgoingRequestsLayout);
         splitLayout.setSizeFull();
         splitLayout.setFlexGrow(1, incomingRequestsLayout, outgoingRequestsLayout);
@@ -102,19 +97,19 @@ public class FriendRequestView extends VerticalLayout {
 
     // Placeholder methods for button actions
     private void acceptRequest(String name) {
-        // Implement the accept request logic here
+
         Notification notification = Notification.show("Accepted friend request from: " + name);
         notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
     }
 
     private void declineRequest(String name) {
-        // Implement the decline request logic here
+
         Notification notification = Notification.show("Declined friend request from: " + name);
         notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
     }
 
     private void cancelOutgoingRequest(String name) {
-        // Implement the cancel outgoing request logic here
+
         Notification notification = Notification.show("Canceled friend request to: " + name);
         notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
     }

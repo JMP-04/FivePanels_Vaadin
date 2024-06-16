@@ -49,7 +49,6 @@ public class HomeView extends VerticalLayout {
         setSizeFull();
         setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
 
-        // Add components
         add(welcomeTitle, noticeMessage, subtitle1, paragraph1, subtitle2, paragraph2, paragraph3);
     }
 }

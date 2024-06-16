@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Password {
 
-    private char[] password;
+    private String hashedPassword;
 
     public Password(char[] password) {
         setPassword(password);
@@ -20,8 +20,8 @@ public class Password {
         setPassword("StrongPassword123!FoobarLOL".toCharArray());
     }
 
-    public char[] getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
     public void setPassword(char[] passwordToHash) {
@@ -39,14 +39,18 @@ public class Password {
             throw new UserException("Password is not strong enough");
         }
 
-        this.password = hashPassword(passwordToHash);
+        this.hashedPassword = hashPassword(passwordToHash);
     }
 
-    private char[] hashPassword(char[] password) {
-        return BCrypt.withDefaults().hashToChar(12, password);
+    private String hashPassword(char[] password) {
+        return BCrypt.withDefaults().hashToString(12, password);
     }
 
-    public boolean isPwStrongEnough(CharSequence password) {
+    public boolean matches(char[] rawPassword) {
+        return BCrypt.verifyer().verify(rawPassword, this.hashedPassword.toCharArray()).verified;
+    }
+
+    private boolean isPwStrongEnough(CharSequence password) {
         Zxcvbn zxcvbn = new Zxcvbn();
         Strength strength = zxcvbn.measure(password);
         return strength.getScore() >= 3;
@@ -54,7 +58,6 @@ public class Password {
 
     @Override
     public String toString() {
-
-        return Arrays.toString(password);
+        return hashedPassword;
     }
 }

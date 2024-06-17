@@ -8,6 +8,7 @@ import com.fivepanels.application.views.medicalcase.MyMedicalCaseView;
 import com.fivepanels.application.views.messenger.MessengerView;
 import com.fivepanels.application.views.user.ContactView;
 import com.fivepanels.application.views.user.FriendRequestView;
+import com.fivepanels.application.views.user.LoginView;
 import com.fivepanels.application.views.user.ProfileView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -66,6 +67,7 @@ public class MainLayout extends AppLayout {
         layout.add(new SideNavItem("Profile", ProfileView.class, LineAwesomeIcon.USER_SOLID.create()));
         layout.add(new SideNavItem("Friend Requests", FriendRequestView.class, LineAwesomeIcon.PEOPLE_CARRY_SOLID.create()));
         layout.add(new SideNavItem("Contacts", ContactView.class, LineAwesomeIcon.GLOBE_SOLID.create()));
+        layout.add(new SideNavItem("Login", LoginView.class, LineAwesomeIcon.BRAIN_SOLID.create()));
 
         layout.add(createSectionLabel("Medical Cases"));
         layout.add(new SideNavItem("Recent Cases", MedicalCaseView.class, LineAwesomeIcon.CROSS_SOLID.create()));

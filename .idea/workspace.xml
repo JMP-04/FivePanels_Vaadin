@@ -4,44 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b52be292-f434-40a6-8c11-3625499432c5" name="Changes" comment="Major changes in project, creating medical cases now possible.">
-      <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/LoginView.java" afterDir="false" />
+    <list default="true" id="b52be292-f434-40a6-8c11-3625499432c5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/misc/Password.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/misc/Password.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/home/HomeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/home/HomeView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/CreateNewMedicalCaseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/CreateNewMedicalCaseView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/MainLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/MainLayout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MedicalCaseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MedicalCaseView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MyMedicalCaseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MyMedicalCaseView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/FriendRequestView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/FriendRequestView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/ProfileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/resources/medicalexperiences.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/resources/medicalexperiences.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-      </MavenGeneralSettings>
-    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -58,10 +32,9 @@
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/janma/Desktop/fp&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/teric.marko/Documents/GitHub/FivePanels_Vaadin&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -71,6 +44,19 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="FivePanels_Vaadin" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="FivePanels_Vaadin" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="fivepanels" />
@@ -100,26 +86,12 @@
       <workItem from="1718454865943" duration="36000" />
       <workItem from="1718456254723" duration="353000" />
       <workItem from="1718456631954" duration="45000" />
-      <workItem from="1718456681339" duration="7133000" />
-      <workItem from="1718480913528" duration="6585000" />
-      <workItem from="1718540577928" duration="5985000" />
+      <workItem from="1718456681339" duration="7787000" />
+      <workItem from="1718582417454" duration="1158000" />
     </task>
-    <task id="LOCAL-00001" summary="Major changes in project, creating medical cases now possible.">
-      <option name="closed" value="true" />
-      <created>1718495879694</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1718495879694</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Major changes in project, creating medical cases now possible." />
-    <option name="LAST_COMMIT_MESSAGE" value="Major changes in project, creating medical cases now possible." />
   </component>
 </project>

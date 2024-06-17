@@ -1,11 +1,14 @@
 package com.fivepanels.application.views.medicalcase;
 
 import com.fivepanels.application.model.domain.medicalcase.MedicalCase;
+import com.fivepanels.application.model.repository.MedicalCaseRepository;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
@@ -21,6 +24,7 @@ public class MedicalCaseView extends VerticalLayout {
         initComponents();
         addComponents();
         addListeners();
+        loadMedicalCases();
     }
 
     private void initComponents() {
@@ -51,5 +55,13 @@ public class MedicalCaseView extends VerticalLayout {
 
     private void addListeners() {
         // Add any event listeners if needed
+    }
+
+    private void loadMedicalCases() {
+        try {
+            grid.setItems(MedicalCaseRepository.findAll());
+        } catch (Exception e) {
+            Notification.show("Error loading medical cases.", 3000, Notification.Position.MIDDLE).addThemeVariants(NotificationVariant.LUMO_ERROR);
+        }
     }
 }

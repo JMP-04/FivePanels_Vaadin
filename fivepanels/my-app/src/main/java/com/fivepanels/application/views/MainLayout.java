@@ -1,5 +1,6 @@
 package com.fivepanels.application.views;
 
+import com.fivepanels.application.security.SecurityService;
 import com.fivepanels.application.views.about.AboutView;
 import com.fivepanels.application.views.home.HomeView;
 import com.fivepanels.application.views.medicalcase.CreateNewMedicalCaseView;
@@ -12,20 +13,28 @@ import com.fivepanels.application.views.user.LoginView;
 import com.fivepanels.application.views.user.ProfileView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
 public class MainLayout extends AppLayout {
 
+    private final SecurityService securityService;
     private H1 viewTitle;
+    // private final AuthenticationContext authenticationContext;
 
-    public MainLayout() {
 
+    public MainLayout(@Autowired SecurityService securityService ) {
+
+        this.securityService = securityService;
+      //  this.authenticationContext = authenticationContext;
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -40,6 +49,16 @@ public class MainLayout extends AppLayout {
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
 
         addToNavbar(true, toggle, viewTitle);
+
+        Button logout = null;
+        if (securityService.getAuthenticatedUser() != null) {
+            logout = new Button("Logout", click ->
+                    securityService.logout());
+        }
+
+        var header = new Header(toggle, viewTitle, logout);
+
+
     }
 
     private void addDrawerContent() {

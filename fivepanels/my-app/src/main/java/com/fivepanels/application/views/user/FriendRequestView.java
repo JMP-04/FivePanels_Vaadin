@@ -1,5 +1,6 @@
 package com.fivepanels.application.views.user;
 
+import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -12,9 +13,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("Friend Requests")
 @Route(value = "user/friend-requests", layout = MainLayout.class)
+@RolesAllowed(Roles.USER)
+
 public class FriendRequestView extends VerticalLayout {
 
     private Grid<String> incomingRequestsGrid;

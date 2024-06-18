@@ -1,5 +1,6 @@
 package com.fivepanels.application.views.about;
 
+import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -7,9 +8,12 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility.FontSize;
 import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
+import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("About")
 @Route(value = "about/about", layout = MainLayout.class)
+@RolesAllowed(Roles.USER)
+
 public class AboutView extends VerticalLayout {
 
     public AboutView() {

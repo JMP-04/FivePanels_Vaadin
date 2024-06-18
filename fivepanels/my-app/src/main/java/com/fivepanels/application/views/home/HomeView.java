@@ -1,5 +1,6 @@
 package com.fivepanels.application.views.home;
 
+import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
@@ -8,9 +9,12 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("Home")
 @Route(value = "", layout = MainLayout.class)
+@RolesAllowed(Roles.USER)
+
 public class HomeView extends VerticalLayout {
 
     private H1 welcomeTitle;

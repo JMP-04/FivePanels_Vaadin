@@ -2,6 +2,7 @@ package com.fivepanels.application.views.medicalcase;
 
 import com.fivepanels.application.model.domain.medicalcase.MedicalCase;
 import com.fivepanels.application.model.repository.MedicalCaseRepository;
+import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
@@ -13,9 +14,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("Recent Cases")
 @Route(value = "medical-cases/recent-cases", layout = MainLayout.class)
+@RolesAllowed(Roles.USER)
+
 public class MedicalCaseView extends VerticalLayout {
 
     private Grid<MedicalCase> grid;

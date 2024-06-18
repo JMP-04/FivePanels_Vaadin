@@ -3,6 +3,7 @@ package com.fivepanels.application.views.messenger;
 import com.fivepanels.application.model.domain.messenger.Chat;
 import com.fivepanels.application.model.domain.messenger.Message;
 import com.fivepanels.application.model.domain.messenger.Messenger;
+import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.listbox.ListBox;
@@ -13,6 +14,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -21,6 +23,8 @@ import java.util.UUID;
 
 @PageTitle("Messenger")
 @Route(value = "messenger/chats", layout = MainLayout.class)
+@RolesAllowed(Roles.USER)
+
 public class MessengerView extends HorizontalLayout {
 
     private ListBox<Chat> chatListBox;

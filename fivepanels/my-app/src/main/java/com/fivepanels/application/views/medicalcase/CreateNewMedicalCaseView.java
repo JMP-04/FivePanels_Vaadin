@@ -3,6 +3,7 @@ package com.fivepanels.application.views.medicalcase;
 import com.fivepanels.application.model.domain.medicalcase.MedicalCase;
 import com.fivepanels.application.model.domain.user.misc.Hashtag;
 import com.fivepanels.application.model.repository.MedicalCaseRepository;
+import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -19,6 +20,7 @@ import com.vaadin.flow.component.upload.receivers.MultiFileBuffer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.html.Div;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -27,6 +29,8 @@ import java.util.List;
 
 @PageTitle("Create New Case")
 @Route(value = "medical-cases/create-new-case", layout = MainLayout.class)
+@RolesAllowed(Roles.USER)
+
 @Component
 public class CreateNewMedicalCaseView extends VerticalLayout {
 

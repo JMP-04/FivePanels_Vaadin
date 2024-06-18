@@ -4,6 +4,7 @@ import com.fivepanels.application.model.domain.user.UserProfile;
 import com.fivepanels.application.model.domain.user.misc.Hashtag;
 import com.fivepanels.application.model.domain.user.misc.Language;
 import com.fivepanels.application.model.domain.user.misc.MedicalTitle;
+import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.fivepanels.application.views.messenger.MessengerView;
 import com.vaadin.flow.component.button.Button;
@@ -18,6 +19,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ import java.util.Set;
 
 @PageTitle("Contacts")
 @Route(value = "user/contacts", layout = MainLayout.class)
+@RolesAllowed(Roles.USER)
+
 public class ContactView extends VerticalLayout {
 
     private Grid<UserProfile> userGrid;

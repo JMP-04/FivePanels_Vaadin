@@ -1,7 +1,6 @@
 package com.fivepanels.application.views.user;
 
 import com.fivepanels.application.model.domain.user.User;
-import com.fivepanels.application.security.roles.Roles;
 import com.fivepanels.application.views.MainLayout;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Paragraph;
@@ -13,7 +12,6 @@ import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("Profile")
 @Route(value = "user/profile", layout = MainLayout.class)
-@RolesAllowed(Roles.USER)
 public class ProfileView extends VerticalLayout {
 
     private User user;

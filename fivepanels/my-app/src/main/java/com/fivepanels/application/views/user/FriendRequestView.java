@@ -1,7 +1,11 @@
 package com.fivepanels.application.views.user;
 
-import com.fivepanels.application.security.roles.Roles;
+import com.fivepanels.application.model.domain.user.User;
+import com.fivepanels.application.model.domain.user.UserProfile;
+import com.fivepanels.application.model.domain.user.UserRelationship;
+import com.fivepanels.application.model.repository.UserRepository;
 import com.fivepanels.application.views.MainLayout;
+import com.fivepanels.application.views.messenger.MessengerView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
@@ -13,71 +17,83 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import jakarta.annotation.security.RolesAllowed;
+import com.vaadin.flow.server.VaadinSession;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @PageTitle("Friend Requests")
 @Route(value = "user/friend-requests", layout = MainLayout.class)
-@RolesAllowed(Roles.USER)
-
 public class FriendRequestView extends VerticalLayout {
 
-    private Grid<String> incomingRequestsGrid;
-    private Grid<String> outgoingRequestsGrid;
+    private Grid<User> incomingRequestsGrid;
+    private Grid<User> outgoingRequestsGrid;
     private VerticalLayout incomingRequestsLayout;
     private VerticalLayout outgoingRequestsLayout;
     private HorizontalLayout splitLayout;
     private H2 incomingHeader;
     private H2 outgoingHeader;
 
+    private List<User> incomingRequests;
+    private List<User> outgoingRequests;
+    private User currentUser;
+
     public FriendRequestView() {
+        this.currentUser = getCurrentUser();
+
+        this.incomingRequests = currentUser.getRelationships().entrySet().stream()
+                .filter(entry -> entry.getValue() == UserRelationship.INCOMING)
+                .map(entry -> UserRepository.findById(entry.getKey()).orElse(null))
+                .collect(Collectors.toList());
+
+        this.outgoingRequests = currentUser.getRelationships().entrySet().stream()
+                .filter(entry -> entry.getValue() == UserRelationship.OUTGOING)
+                .map(entry -> UserRepository.findById(entry.getKey()).orElse(null))
+                .collect(Collectors.toList());
+
         initComponents();
         addComponents();
     }
 
-    private void initComponents() {
+    private User getCurrentUser() {
+        return (User) VaadinSession.getCurrent().getAttribute(User.class);
+    }
 
+    private void initComponents() {
         incomingRequestsGrid = new Grid<>();
         outgoingRequestsGrid = new Grid<>();
 
-        // Example data for demonstration
-        incomingRequestsGrid.setItems("Alice", "Bob", "Charlie");
-        outgoingRequestsGrid.setItems("David", "Eve", "Frank");
+        incomingRequestsGrid.setItems(incomingRequests);
+        outgoingRequestsGrid.setItems(outgoingRequests);
 
-        incomingHeader = new H2("Incoming Requests");
-        incomingHeader.getStyle().set("color", "green");
-
-        outgoingHeader = new H2("Outgoing Requests");
-        outgoingHeader.getStyle().set("color", "red");
-
-        incomingRequestsGrid.addColumn(name -> name).setHeader(incomingHeader);
-        outgoingRequestsGrid.addColumn(name -> name).setHeader(outgoingHeader);
-
-        incomingRequestsGrid.addColumn(new ComponentRenderer<>(item -> {
+        incomingRequestsGrid.addColumn(user -> user.getUserProfile().getFirstName()).setHeader("First Name");
+        incomingRequestsGrid.addColumn(user -> user.getUserProfile().getLastName()).setHeader("Last Name");
+        incomingRequestsGrid.addColumn(user -> user.getUserProfile().getCity()).setHeader("City");
+        incomingRequestsGrid.addColumn(new ComponentRenderer<>(user -> {
             HorizontalLayout buttonsLayout = new HorizontalLayout();
-            Button acceptButton = new Button("Accept", event -> acceptRequest(item));
-            Button declineButton = new Button("Decline", event -> declineRequest(item));
-            acceptButton.getStyle().set("background-color", "green");
-            acceptButton.getStyle().set("color", "white");
-            declineButton.getStyle().set("background-color", "red");
-            declineButton.getStyle().set("color", "white");
+            Button acceptButton = new Button("Accept", event -> acceptRequest(user));
+            Button declineButton = new Button("Decline", event -> declineRequest(user));
             buttonsLayout.add(acceptButton, declineButton);
             return buttonsLayout;
-        })).setHeader(createStyledHeader("Actions"));
+        })).setHeader("Actions");
 
-        outgoingRequestsGrid.addColumn(new ComponentRenderer<>(item -> {
-            HorizontalLayout buttonsLayout = new HorizontalLayout();
-            Button cancelButton = new Button("Cancel friend request", event -> cancelOutgoingRequest(item));
-            cancelButton.getStyle().set("background-color", "red");
-            cancelButton.getStyle().set("color", "white");
-            buttonsLayout.add(cancelButton);
-            return buttonsLayout;
-        })).setHeader(createStyledHeader("Actions"));
+        outgoingRequestsGrid.addColumn(user -> user.getUserProfile().getFirstName()).setHeader("First Name");
+        outgoingRequestsGrid.addColumn(user -> user.getUserProfile().getLastName()).setHeader("Last Name");
+        outgoingRequestsGrid.addColumn(user -> user.getUserProfile().getCity()).setHeader("City");
+        outgoingRequestsGrid.addColumn(new ComponentRenderer<>(user -> {
+            Button cancelButton = new Button("Cancel Request", event -> cancelOutgoingRequest(user));
+            return cancelButton;
+        })).setHeader("Actions");
 
-        incomingRequestsLayout = new VerticalLayout(incomingRequestsGrid);
-        incomingRequestsLayout.setSizeFull();
+        incomingHeader = new H2("Incoming Requests");
+        outgoingHeader = new H2("Outgoing Requests");
 
-        outgoingRequestsLayout = new VerticalLayout(outgoingRequestsGrid);
-        outgoingRequestsLayout.setSizeFull();
+        refreshData();
+
+        incomingRequestsLayout = new VerticalLayout(incomingHeader, incomingRequestsGrid);
+        outgoingRequestsLayout = new VerticalLayout(outgoingHeader, outgoingRequestsGrid);
 
         splitLayout = new HorizontalLayout(incomingRequestsLayout, outgoingRequestsLayout);
         splitLayout.setSizeFull();
@@ -85,36 +101,59 @@ public class FriendRequestView extends VerticalLayout {
     }
 
     private void addComponents() {
-        // Add the horizontal layout to the main layout
         add(splitLayout);
         setSizeFull();
     }
 
-    private Div createStyledHeader(String text) {
-        Div header = new Div();
-        header.setText(text);
-        header.getStyle().set("color", "grey");
-        header.getStyle().set("font-weight", "bold");
-        header.getStyle().set("font-size", "var(--lumo-font-size-l)");
-        return header;
+    private void acceptRequest(User user) {
+        currentUser.acceptFriendRequest(user);
+        UserRepository.save(currentUser);
+        UserRepository.save(user);
+
+        refreshData();
+        Notification.show("Accepted friend request from: " + user.getUserProfile().getFirstName(), 3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+        navigateToChatView(user);
     }
 
-    // Placeholder methods for button actions
-    private void acceptRequest(String name) {
+    private void declineRequest(User user) {
+        currentUser.declineFriendRequest(user);
+        UserRepository.save(currentUser);
+        UserRepository.save(user);
 
-        Notification notification = Notification.show("Accepted friend request from: " + name);
-        notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+        refreshData();
+        Notification.show("Declined friend request from: " + user.getUserProfile().getFirstName(), 3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);
     }
 
-    private void declineRequest(String name) {
+    private void cancelOutgoingRequest(User user) {
+        currentUser.removeFriend(user);
+        UserRepository.save(currentUser);
+        UserRepository.save(user);
 
-        Notification notification = Notification.show("Declined friend request from: " + name);
-        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+        refreshData();
+        Notification.show("Canceled friend request to: " + user.getUserProfile().getFirstName(), 3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);
     }
 
-    private void cancelOutgoingRequest(String name) {
+    private void refreshData() {
+        incomingRequests = currentUser.getRelationships().entrySet().stream()
+                .filter(entry -> entry.getValue() == UserRelationship.INCOMING)
+                .map(entry -> UserRepository.findById(entry.getKey()).orElse(null))
+                .collect(Collectors.toList());
 
-        Notification notification = Notification.show("Canceled friend request to: " + name);
-        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+        outgoingRequests = currentUser.getRelationships().entrySet().stream()
+                .filter(entry -> entry.getValue() == UserRelationship.OUTGOING)
+                .map(entry -> UserRepository.findById(entry.getKey()).orElse(null))
+                .collect(Collectors.toList());
+
+        incomingRequestsGrid.setItems(incomingRequests);
+        outgoingRequestsGrid.setItems(outgoingRequests);
+    }
+
+    private void navigateToChatView(User friend) {
+        Notification.show("Navigating to chat with " + friend.getUserProfile().getFirstName());
+        getUI().ifPresent(ui -> ui.navigate(MessengerView.class));
     }
 }

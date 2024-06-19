@@ -25,8 +25,9 @@ public class User extends BaseEntity {
     private Set<MedicalCase> isOwnerOfMedicalCases;
     private UserProfile userProfile;
     private Map<UUID, UserRelationship> relationships;
+    private String role;
 
-    public User(String firstName, String lastName, String city, Email email, Password password) {
+    public User(String firstName, String lastName, String city, Email email, Password password, String role) {
         super();
         setEmail(email);
         setPassword(password);
@@ -35,6 +36,7 @@ public class User extends BaseEntity {
         this.isMemberOfMedicalCases = new HashSet<>();
         this.isOwnerOfMedicalCases = new HashSet<>();
         this.relationships = new HashMap<>();
+        this.role = role;
         UserRepository.save(this);
     }
 
@@ -89,67 +91,16 @@ public class User extends BaseEntity {
         relationships.put(userId, relationship);
     }
 
-    public MedicalCase createNewMedicalCase(String medicalCaseName, List<String> textContent, List<File> fileContent, Set<User> medicalCaseMembers, Set<Hashtag> medicalCaseHashtags) {
-        Assertion.isNotNull(medicalCaseName, "medicalCaseName");
-        Assertion.isNotBlank(medicalCaseName, "medicalCaseName");
-        Assertion.isNotNull(textContent, "textContent");
-        Assertion.hasMinLength(medicalCaseName, 8, "medicalCaseName");
-        Assertion.hasMaxLength(medicalCaseName, 128, "medicalCaseName");
-
-        MedicalCase mc = new MedicalCase(medicalCaseName, this, textContent, fileContent, medicalCaseMembers, medicalCaseHashtags);
-        this.isOwnerOfMedicalCases.add(mc);
-        this.userProfile.addActivityScore(40);
-        UserRepository.save(this);
-        return mc;
+    public String getRole() {
+        return role;
     }
 
-    public void deleteMedicalCase(MedicalCase medicalCase) {
-        Assertion.isNotNull(medicalCase, "medicalCase");
-        if (!isOwnerOfMedicalCases.contains(medicalCase)) {
-            throw new UserException("User is not an owner of medical case");
-        }
-        isOwnerOfMedicalCases.remove(medicalCase);
-        UserRepository.deleteById(medicalCase.getId());
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public void joinMedicalCase(MedicalCase medicalCase) {
-        Assertion.isNotNull(medicalCase, "medicalCase");
-        if (this.isMemberOfMedicalCases.contains(medicalCase)) {
-            throw new UserException("User is already a member of medical case");
-        }
-        this.isMemberOfMedicalCases.add(medicalCase);
-        this.userProfile.addActivityScore(5);
-    }
-
-    public void leaveMedicalCase(MedicalCase medicalCase) {
-        Assertion.isNotNull(medicalCase, "medicalCase");
-        if (!this.isMemberOfMedicalCases.contains(medicalCase)) {
-            throw new UserException("User is not a member of medical case");
-        }
-        this.isMemberOfMedicalCases.remove(medicalCase);
-    }
-
-    public void addMemberToMedicalCase(User userToAdd, MedicalCase medicalCase) {
-        Assertion.isNotNull(userToAdd, "userToAdd");
-        Assertion.isNotNull(medicalCase, "medicalCase");
-        if (medicalCase.getMedicalCaseMembers().contains(userToAdd)) {
-            throw new UserException("User is already a member of medical case");
-        }
-        if (this.getId().equals(userToAdd.getId())) {
-            throw new UserException("User cannot add himself to medical case");
-        }
-        medicalCase.getMedicalCaseMembers().add(userToAdd);
-        userToAdd.getIsMemberOfMedicalCases().add(medicalCase);
-    }
-
-    public void removeMemberFromMedicalCase(User userToRemove, MedicalCase medicalCase) {
-        Assertion.isNotNull(userToRemove, "userToRemove");
-        Assertion.isNotNull(medicalCase, "medicalCase");
-        if (!medicalCase.getMedicalCaseMembers().contains(userToRemove)) {
-            throw new UserException("User is not a member of medical case");
-        }
-        medicalCase.getMedicalCaseMembers().remove(userToRemove);
-        userToRemove.getIsMemberOfMedicalCases().remove(medicalCase);
+    public boolean checkPassword(char[] inputPassword) {
+        return Arrays.equals(this.password.getPassword(), inputPassword);
     }
 
     public void addFriend(User friend) {
@@ -215,10 +166,11 @@ public class User extends BaseEntity {
         Set<User> members = new HashSet<>();
         members.add(this);
         members.add(friend);
-        Chat chat = new Chat("Direct Chat between " + this + " and " + friend + "!", members);
+        Chat chat = new Chat("Direct Chat between " + this.getUserProfile().getFirstName() + " and " + friend.getUserProfile().getFirstName() + "!", members);
         this.getMessenger().addChat(chat);
         friend.getMessenger().addChat(chat);
     }
+
 
     public void createGroupChatWith(User... friends) {
         Assertion.isNotNull(friends, "friends");

@@ -24,7 +24,7 @@ public class UserProfile {
     public UserProfile() {
         this.firstName = null;
         this.lastName = null;
-        this.profilePicture = null;
+        this.profilePicture = getDefaultProfilePicture();
         this.medicalTitles = null;
         this.experiences = null;
         this.city = null;
@@ -37,7 +37,7 @@ public class UserProfile {
     public UserProfile(String firstName, String lastName, File profilePicture, List<MedicalTitle> medicalTitles, List<Hashtag> experiences, String city, Set<Language> languages) {
         setFirstName(firstName);
         setLastName(lastName);
-        setProfilePicture(profilePicture);
+        setProfilePicture(profilePicture != null ? profilePicture : getDefaultProfilePicture());
         setMedicalTitles(medicalTitles);
         setExperiences(experiences);
         setCity(city);
@@ -58,6 +58,8 @@ public class UserProfile {
         setExpertScore(0);
         this.correctAnswerPercentages = new ArrayList<>();
     }
+
+    // Getters and setters...
 
     public String getFirstName() {
         return firstName;
@@ -80,12 +82,15 @@ public class UserProfile {
     }
 
     public File getProfilePicture() {
-        return profilePicture;
+        return profilePicture != null ? profilePicture : getDefaultProfilePicture();
     }
 
     public void setProfilePicture(File profilePicture) {
-        Assertion.isNotNull(profilePicture, "profilePicture");
-        this.profilePicture = profilePicture;
+        this.profilePicture = profilePicture != null ? profilePicture : getDefaultProfilePicture();
+    }
+
+    private File getDefaultProfilePicture() {
+        return new File("path/to/default/profilePicture.png");
     }
 
     public List<MedicalTitle> getMedicalTitles() {

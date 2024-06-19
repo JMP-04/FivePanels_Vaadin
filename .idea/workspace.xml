@@ -4,26 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b52be292-f434-40a6-8c11-3625499432c5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/security/CustomRequestCache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/security/SecurityConfig.java" afterDir="false" />
+    <list default="true" id="b52be292-f434-40a6-8c11-3625499432c5" name="Changes" comment="Some changes done to project, lot of bug fixing todos.">
+      <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/config/ApplicationInitializer.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/security/SecurityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/security/roles/Roles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/admin/AdminLayout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/AdminDashboardView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/messenger/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/messenger/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/messenger/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/messenger/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/messenger/Messenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/messenger/Messenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/misc/Password.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/domain/user/misc/Password.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/foundation/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/foundation/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/repository/ChatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/repository/ChatRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/model/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/MainLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/MainLayout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/about/AboutView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/about/AboutView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/home/HomeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/home/HomeView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/CreateNewMedicalCaseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/CreateNewMedicalCaseView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MedicalCaseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MedicalCaseView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MyMedicalCaseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/medicalcase/MyMedicalCaseView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/messenger/MessengerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/messenger/MessengerView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/ContactView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/ContactView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/FriendRequestView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/FriendRequestView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/ProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fivepanels/my-app/src/main/java/com/fivepanels/application/views/user/RegisterView.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +44,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -48,40 +62,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.fivepanels [install].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.Application.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/teric.marko/Documents/GitHub/FivePanels_Vaadin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/janma/Desktop/fp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="FivePanels_Vaadin" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="FivePanels_Vaadin" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="fivepanels" />
@@ -111,24 +111,39 @@
       <workItem from="1718454865943" duration="36000" />
       <workItem from="1718456254723" duration="353000" />
       <workItem from="1718456631954" duration="45000" />
-      <workItem from="1718456681339" duration="7787000" />
-      <workItem from="1718582417454" duration="2258000" />
-      <workItem from="1718663564517" duration="20973000" />
+      <workItem from="1718456681339" duration="7133000" />
+      <workItem from="1718480913528" duration="6585000" />
+      <workItem from="1718540577928" duration="6211000" />
+      <workItem from="1718571322609" duration="135000" />
+      <workItem from="1718640090430" duration="18000" />
+      <workItem from="1718647482148" duration="19000" />
+      <workItem from="1718745298933" duration="14203000" />
     </task>
+    <task id="LOCAL-00001" summary="Major changes in project, creating medical cases now possible.">
+      <option name="closed" value="true" />
+      <created>1718495879694</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718495879694</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Some changes done to project, lot of bug fixing todos.">
+      <option name="closed" value="true" />
+      <created>1718548697357</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718548697357</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Major changes in project, creating medical cases now possible." />
+    <MESSAGE value="Some changes done to project, lot of bug fixing todos." />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes done to project, lot of bug fixing todos." />
   </component>
 </project>

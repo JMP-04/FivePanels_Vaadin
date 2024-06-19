@@ -8,12 +8,12 @@ import com.fivepanels.application.model.foundation.exception.MessengerException;
 import com.fivepanels.application.model.repository.MessengerRepository;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class Messenger extends BaseEntity {
 
-    // Not null
     private Set<Chat> chats;
 
     public Messenger() {
@@ -38,7 +38,6 @@ public class Messenger extends BaseEntity {
     }
 
     public void removeChat(Chat chat) {
-
         Assertion.isNotNull(chat, "chat");
         chats.remove(chat);
     }
@@ -97,14 +96,11 @@ public class Messenger extends BaseEntity {
         throw new AssertionException("Chat not found with ID: " + chatId);
     }
 
-    public String showMessageHistory(UUID chatId) {
-
+    public List<Message> showMessageHistory(UUID chatId) {
         Assertion.isNotNull(chatId, "chatId");
         for (Chat chat : chats) {
-
             if (chat.getId().equals(chatId)) {
-
-                return chat.showMessageHistory();
+                return chat.getMessageHistory();
             }
         }
 

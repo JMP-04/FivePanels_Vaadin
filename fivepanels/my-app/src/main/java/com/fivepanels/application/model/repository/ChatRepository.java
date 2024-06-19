@@ -22,7 +22,7 @@ public class ChatRepository {
     public static Chat save(Chat entity) {
 
         map.put(entity.getId(), entity);
-        entity.setUpdatedAt(Instant.now());
+        entity.setCreatedAt(Instant.now());
         return entity;
     }
 
